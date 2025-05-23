@@ -1,5 +1,5 @@
 {% set name = "authzed-py" %}
-{% set version = "1.20.0" %}
+{% set version = "1.21.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/authzed/authzed-{{ version }}.tar.gz
-  sha256: 7610e6b897d4a61765739183e68ca3de32cbc6dc0dc1df247444ae129e58627d
+  sha256: c354d19af5ef1a393381d5be670dd946916742573ae2bf3ac87becdbf44f093b
 
 build:
   noarch: python
@@ -25,6 +25,7 @@ requirements:
     - protobuf >=5.26,<6
     - grpc-interceptor >=0.15.4,<0.16.0
     - googleapis-common-protos >=1.65.0,<2.0.0
+    - protovalidate >=0.7.1,<0.8.0
 
 test:
   imports:
