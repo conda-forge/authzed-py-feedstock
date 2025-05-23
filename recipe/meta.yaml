@@ -1,5 +1,5 @@
 {% set name = "authzed-py" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/authzed/authzed-{{ version }}.tar.gz
-  sha256: b88eb00cfb6cf41180890803b13ab51ae50b57ea924cdd99d5dad518542e7d63
+  sha256: 6e1300ff75af1840acdb3e0b2bc0dec31a8cf631c4ac6fc1ac674b9ea02d043a
 
 build:
   noarch: python
