@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: authzed-py
+  version: 1.20.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/authzed/authzed-${{ version }}.tar.gz
+  sha256: 7610e6b897d4a61765739183e68ca3de32cbc6dc0dc1df247444ae129e58627d
+
+build:
+  noarch: python
+  number: 1
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - poetry-core
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - grpcio >=1.63.0,<2.0.0
+    - protobuf >=5.26,<6
+    - grpc-interceptor >=0.15.4,<0.16.0
+    - googleapis-common-protos >=1.65.0,<2.0.0
+
+tests:
+  - python:
+      imports:
+        - authzed
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+
+about:
+  homepage: https://github.com/authzed/authzed-py
+  summary: Client library for SpiceDB.
+  license: Apache-2.0
+  license_file: LICENSE
+  repository: https://github.com/authzed/authzed-py
+
+extra:
+  recipe-maintainers:
+    - dbast
