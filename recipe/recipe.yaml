@@ -2,30 +2,34 @@ schema_version: 1
 
 context:
   name: authzed-py
-  version: 1.20.0
+  version: 1.25.0
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/authzed/authzed-${{ version }}.tar.gz
-  sha256: 7610e6b897d4a61765739183e68ca3de32cbc6dc0dc1df247444ae129e58627d
+  - url: https://pypi.org/packages/source/${{ name[0] }}/authzed/authzed-${{ version }}.tar.gz
+    sha256: 8a59617f072d64e6b4c450f1379339aa3b9a4251cc2a55d5e6abe4ac6b8b5a4c
+  # the sdist does not ship a license file, fetch it from the GitHub tag
+  - url: https://raw.githubusercontent.com/authzed/authzed-py/v${{ version }}/LICENSE
+    sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+    file_name: LICENSE
 
 build:
   noarch: python
-  number: 1
+  number: 0
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python ${{ python_min }}.*
-    - poetry-core
+    - uv-build >=0.8.15,<0.12.0
     - pip
   run:
     - python >=${{ python_min }}
     - grpcio >=1.63.0,<2.0.0
-    - protobuf >=5.26,<6
+    - protobuf >=5.26,<8
     - grpc-interceptor >=0.15.4,<0.16.0
     - googleapis-common-protos >=1.65.0,<2.0.0
 
